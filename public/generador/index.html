@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firmas Ofimundo</title>
+    <link rel="stylesheet" href="/generador/styles.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div>
+        <div class="brand">OFIMUNDO</div>
+        <h1>Gestión de firmas corporativas</h1>
+        <p>Creación, vista previa y administración de firmas</p>
+    </div>
+</header>
+
+<main>
+<div class="tabs">
+
+    <button
+        id="btnNuevoUsuario"
+        class="tab active">
+
+        + Nuevo usuario
+
+    </button>
+
+
+    <button
+        id="btnUsuarios"
+        class="tab">
+
+        Usuarios
+
+    </button>
+
+
+    <button
+        id="btnBannerGlobal"
+        class="tab">
+
+        Banner global
+
+    </button>
+
+</div>
+
+<section class="workspace">
+
+    <!-- FORMULARIO -->
+    <div class="card formulario">
+
+        <div class="card-header">
+            <div>
+                <h2>Datos del usuario</h2>
+                <p>Completa la información que aparecerá en la firma.</p>
+            </div>
+        </div>
+
+        <div class="campo">
+            <label>Nombre completo</label>
+            <input id="nombre" type="text" value="César Caruz">
+        </div>
+
+        <div class="campo">
+            <label>Cargo</label>
+            <input id="cargo" type="text"
+                   value="Encargado de Infraestructura y Redes">
+        </div>
+
+        <div class="campo">
+            <label>Correo</label>
+            <input id="correo" type="email"
+                   value="ccaruz@ofimundo.cl">
+        </div>
+
+        <div class="campo">
+            <label>Celular</label>
+            <input id="celular" type="text"
+                   value="569 9214 9059">
+        </div>
+
+        <div class="campo">
+            <label>LinkedIn</label>
+            <input id="linkedin" type="url"
+                   placeholder="https://linkedin.com/in/...">
+        </div>
+
+        <div class="campo">
+            <label>Microsoft Booking</label>
+            <input id="booking" type="url"
+                   placeholder="https://outlook.office.com/book/...">
+        </div>
+
+        <div class="separador"></div>
+
+        <div class="campo">
+            <label>Foto de perfil</label>
+
+            <div class="upload">
+                <input id="foto" type="file"
+                       accept="image/png,image/jpeg,image/webp">
+
+                <span>PNG, JPG o WEBP</span>
+            </div>
+        </div>
+
+        <div class="campo">
+            <label>QR Social</label>
+
+            <div class="upload">
+                <input id="qrSocial" type="file"
+                       accept="image/png,image/jpeg,image/webp">
+
+                <span>Imagen QR de redes sociales</span>
+            </div>
+        </div>
+
+        <div class="campo">
+            <label>QR LinkedIn</label>
+
+            <div class="upload">
+                <input id="qrLinkedin" type="file"
+                       accept="image/png,image/jpeg,image/webp">
+
+                <span>Imagen QR de LinkedIn</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- PREVIEW -->
+    <div class="card preview-card">
+
+        <div class="preview-header">
+            <div>
+                <h2>Vista previa</h2>
+                <p>Así se visualizará la firma en Outlook.</p>
+            </div>
+
+            <span class="estado">Vista previa</span>
+        </div>
+
+
+        <div class="email-area">
+
+            <div id="firmaPreview" class="firma-wrapper">
+
+                <table
+                    width="630"
+                    cellpadding="0"
+                    cellspacing="0"
+                    border="0"
+                    style="
+                    width:630px;
+                    font-family:Arial,Verdana,sans-serif;
+                    color:#333333;
+                    background:#ffffff;
+                    ">
+
+                    <!-- SUPERIOR -->
+                    <tr>
+                        <td colspan="3"
+                            style="padding:0;text-align:right;">
+
+                            <img
+                                src="https://d3d57fbyf4vdnc.cloudfront.net/firma_ofimundo/01-elementos/elemento-superior.png"
+                                width="300"
+                                height="35"
+                                style="display:block;margin-left:auto;"
+                                alt="">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3"
+                            style="padding:5px 0 0 0;text-align:right;">
+
+                            <img
+                                src="https://d3d57fbyf4vdnc.cloudfront.net/firma_ofimundo/01-elementos/elemento-barra.png"
+                                width="300"
+                                height="7"
+                                style="display:block;margin-left:auto;"
+                                alt="">
+                        </td>
+                    </tr>
+
+
+                    <!-- CUERPO -->
+                    <tr>
+
+                        <!-- FOTO -->
+                        <td width="170"
+                            valign="middle"
+                            align="left">
+
+                            <img
+                                id="previewFoto"
+                                src="https://d3d57fbyf4vdnc.cloudfront.net/firma_ofimundo/02-foto_perfil/cesar_caruz.png"
+                                width="155"
+                                height="155"
+                                style="
+                                width:155px;
+                                height:155px;
+                                border-radius:50%;
+                                object-fit:cover;
+                                display:block;
+                                "
+                                alt="Foto">
+
+                        </td>
+
+
+                        <!-- INFORMACION -->
+                        <td width="230"
+                            valign="middle"
+                            align="left"
+                            style="padding-left:20px;">
+
+                            <p id="previewNombre"
+                               style="
+                               margin:0;
+                               font-weight:bold;
+                               font-size:18px;
+                               ">
+                                César Caruz
+                            </p>
+
+                            <p id="previewCargo"
+                               style="
+                               margin:2px 0 0 0;
+                               font-size:16px;
+                               color:#555555;
+                               ">
+                                Encargado de Infraestructura y Redes
+                            </p>
+
+                            <p style="
+                               margin:2px 0 0 0;
+                               font-size:16px;
+                               color:#555555;
+                               ">
+
+                                <span>Tel:</span>
+                                <span id="previewCelular">
+                                    569 9214 9059
+                                </span>
+
+                            </p>
+
+                        </td>
+
+
+                        <!-- QR -->
+                        <td valign="middle"
+                            align="right">
+
+                            <table
+                                cellpadding="0"
+                                cellspacing="0"
+                                border="0">
+
+                                <tr>
+
+                                    <td align="center"
+                                        style="padding:0 15px;">
+
+                                        <img
+                                            id="previewQrSocial"
+                                            src="https://d3d57fbyf4vdnc.cloudfront.net/firma_ofimundo/03-qr_social/cesar_caruz.png"
+                                            width="110"
+                                            height="105"
+                                            style="display:block;"
+                                            alt="QR Social">
+
+                                        <div class="qr-label">
+                                            Redes
+                                        </div>
+
+                                    </td>
+
+
+                                    <td align="center"
+                                        style="padding:0;">
+
+                                        <img
+                                            id="previewQrLinkedin"
+                                            src="https://d3d57fbyf4vdnc.cloudfront.net/firma_ofimundo/04-qr_linkedin/cesar_caruz.png"
+                                            width="110"
+                                            height="105"
+                                            style="display:block;"
+                                            alt="QR LinkedIn">
+
+                                        <div class="qr-label">
+                                            LinkedIn
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </table>
+
+                        </td>
+
+                    </tr>
+                       
+
+                    <!-- BANNER -->
+                    <tr>
+
+                        <td colspan="3"
+                            align="center"
+                            style="padding:0;">
+
+                            <img
+                                id="previewBanner"
+                                src="https://d3d57fbyf4vdnc.cloudfront.net/firma_ofimundo/01-elementos/elemento-inferior-18sep2026.png"
+                                width="630"
+                                style="
+                                width:630px;
+                                display:block;
+                                margin-top:8px;
+                                "
+                                alt="Banner Ofimundo">
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <div class="acciones">
+
+            <button id="copiar" class="btn-secondary">
+                Copiar firma
+            </button>
+
+            <button id="guardar" class="btn-primary">
+                Guardar y publicar
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BANNER GLOBAL -->
+<section class="card banner-panel">
+
+    <div>
+
+        <span class="badge">GLOBAL</span>
+
+        <h2>Banner corporativo</h2>
+
+        <p>
+            Cambia el banner utilizado por todas las firmas
+            corporativas de Ofimundo.
+        </p>
+
+    </div>
+
+
+    <div class="banner-preview">
+
+        <img
+            id="bannerAdministracion"
+            src="https://d3d57fbyf4vdnc.cloudfront.net/firma_ofimundo/01-elementos/elemento-inferior-18sep2026.png"
+            alt="Banner">
+
+    </div>
+
+
+    <div class="banner-upload">
+
+        <input
+            id="archivoBanner"
+            type="file"
+            accept="image/png,image/jpeg,image/webp">
+
+        <button
+            id="subirBanner"
+            class="btn-primary">
+
+            Aplicar a todas las firmas
+
+        </button>
+
+    </div>
+
+    <div id="estadoBanner"></div>
+
+</section>
+
+
+
+
+<!-- =====================================================
+     USUARIOS
+====================================================== -->
+
+<section
+    id="vistaUsuarios"
+    class="card usuarios-panel"
+    style="display:none;">
+
+    <div class="usuarios-header">
+
+        <div>
+            <h2>Usuarios y firmas</h2>
+            <p>
+                Administración de las firmas corporativas
+                disponibles en el sistema.
+            </p>
+        </div>
+
+        <button
+            id="nuevoDesdeUsuarios"
+            class="btn-primary">
+            + Nuevo usuario
+        </button>
+
+    </div>
+
+    <div class="usuarios-toolbar">
+
+    <input
+        id="buscarUsuario"
+        class="busqueda"
+        type="text"
+        placeholder="Buscar por usuario o correo...">
+
+    <button
+        id="btnBuscarUsuario"
+        class="btn-primary">
+        Buscar
+    </button>
+
+    <button
+        id="btnLimpiarBusqueda"
+        class="btn-secondary">
+        Limpiar
+    </button>
+
+</div>
+
+    <div class="tabla-wrapper">
+
+        <table class="tabla-usuarios">
+
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Correo</th>
+                    <th>Firma</th>
+                    <th>Banner</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+
+            <tbody id="listaUsuarios">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+</main>
+
+<script src="/generador/app.js"></script>
+
+
+<!-- OFILAB FOOTER -->
+<footer class="ofilab-footer">
+
+    <div class="ofilab-line"></div>
+
+    <div class="ofilab-footer-content">
+
+        <div class="ofilab-brand">
+
+            <img
+                src="/assets/ofilab-logo.png"
+                alt="OFILAB"
+                class="ofilab-logo">
+
+            <div class="ofilab-description">
+                Soluciones tecnológicas que impulsan la innovación
+                y transforman tu negocio.
+            </div>
+
+        </div>
+
+
+        <div class="ofilab-footer-info">
+
+            <div class="ofilab-footer-section">
+                <strong>PLATAFORMA</strong>
+                <span>Gestión de firmas</span>
+                <span>Usuarios</span>
+                <span>Banners corporativos</span>
+            </div>
+
+            <div class="ofilab-footer-section">
+                <strong>SISTEMA</strong>
+                <span>Microsoft 365</span>
+                <span>Outlook</span>
+                <span>Ofimundo</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="ofilab-bottom">
+
+        <div>
+            © 2026 OFILAB. Todos los derechos reservados.
+        </div>
+
+        <div class="developer">
+            Desarrollado por
+            <strong>Cesar Caruz</strong>
+            <span class="emoji">😎</span>
+        </div>
+
+    </div>
+
+</footer>
+<!-- FIN OFILAB FOOTER -->
+
+</body>
+</html>

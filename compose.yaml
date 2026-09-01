@@ -1,0 +1,24 @@
+services:
+  firmas-ofimundo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: firmas-ofimundo
+    restart: unless-stopped
+
+    environment:
+      NODE_ENV: production
+      PORT: 3002
+      ADMIN_USER: admin
+      ADMIN_PASSWORD: Soporte0101
+      SESSION_SECRET: OfilabFirmas2026SesionSegura
+
+    ports:
+      - "127.0.0.1:3002:3002"
+
+    volumes:
+      - ./public/firmas:/app/public/firmas
+      - ./public/data:/app/public/data
+      - ./public/uploads:/app/public/uploads
+      - ./public/banners:/app/public/banners

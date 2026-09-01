@@ -1,0 +1,15 @@
+node_modules/
+.env
+*.log
+
+public/uploads/
+public/banners/usuarios/
+
+public/data/banner-config.json
+
+*.backup
+*.bak
+server.js.backup*
+server.js.pre-*
+
+.DS_Store
