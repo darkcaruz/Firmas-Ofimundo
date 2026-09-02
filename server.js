@@ -312,7 +312,32 @@ function normalizarEmail(email) {
     .toLowerCase();
 }
 
+function procesarDataUri(dataUri) {
+  if (!dataUri) return null;
 
+  const texto = String(dataUri).trim();
+
+  const match = texto.match(
+    /^data:(image\/(?:png|jpeg|jpg|webp));base64,(.+)$/i
+  );
+
+  if (!match) {
+    throw new Error("Formato de imagen no válido");
+  }
+
+  const mime = match[1].toLowerCase();
+  const base64 = match[2];
+
+  let ext = "png";
+  if (mime.includes("jpeg") || mime.includes("jpg")) ext = "jpg";
+  if (mime.includes("webp")) ext = "webp";
+
+  return {
+    mime,
+    ext,
+    buffer: Buffer.from(base64, "base64")
+  };
+}
 function cargarConfig() {
 
   const CONFIG_PATH =
@@ -644,13 +669,33 @@ app.post("/api/usuario", async (req, res) => {
       });
     }
 
-    const nombreCorto =
-      nombre
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_+|_+$/g, "");
+   let nombreCortoGenerado =
+  nombre
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+
+let nombreCorto = nombreCortoGenerado;
+
+try {
+  const usuariosActuales = await leerUsuarios();
+
+  const existente = usuariosActuales.find(
+    u => normalizarEmail(u.correo_empleado) === email
+  );
+
+  if (existente && existente.nombre_corto) {
+    nombreCorto = existente.nombre_corto;
+  }
+
+} catch (error) {
+  console.error(
+    "No se pudo comprobar nombre_corto existente:",
+    error
+  );
+}
 
     const marker =
       "OFIMUNDO_SIG_" +
@@ -684,8 +729,8 @@ app.post("/api/usuario", async (req, res) => {
         procesarDataUri(data);
 
       const nombreArchivo =
-        tipo + "." +
-        imagen.extension;
+  tipo + "." +
+  imagen.ext;
 
       const destino =
         path.join(
@@ -698,14 +743,13 @@ app.post("/api/usuario", async (req, res) => {
         imagen.buffer
       );
 
-      return (
-        "/uploads/" +
-        nombreCorto +
-        "/" +
-        nombreArchivo
-      );
-    }
-
+     return (
+  "https://firmas.ofimundo.cl/uploads/" +
+  nombreCorto +
+  "/" +
+  nombreArchivo
+);
+}
 
     const fotoUrl =
       guardarImagenBase64(

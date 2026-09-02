@@ -72,7 +72,27 @@ previewImagen($("foto"), $("previewFoto"));
 previewImagen($("qrSocial"), $("previewQrSocial"));
 previewImagen($("qrLinkedin"), $("previewQrLinkedin"));
 
+function leerArchivoBase64(input) {
+  return new Promise((resolve, reject) => {
+    if (!input || !input.files || input.files.length === 0) {
+      resolve(null);
+      return;
+    }
 
+    const archivo = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+
+    reader.onerror = () => {
+      reject(new Error("No fue posible leer el archivo"));
+    };
+
+    reader.readAsDataURL(archivo);
+  });
+}
 /* =========================================
    COPIAR FIRMA
 ========================================= */
@@ -276,16 +296,11 @@ async () => {
 
         async function archivoBase64(input) {
 
-            const archivo =
-                input.files[0];
+    if (!input || !input.files || input.files.length === 0)
+        return null;
 
-            if (!archivo)
-                return null;
-
-            return await leerArchivoBase64(
-                archivo
-            );
-        }
+    return await leerArchivoBase64(input);
+}
 
 
         const fotoBase64 =
